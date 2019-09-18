@@ -6,8 +6,8 @@ private static java.util.Scanner sc;
 public static void main(String[] abc) {
 	Employee_Service emp= new Employee_Service();
 	while(true) {
-		System.out.println("1. Add Employee\n 2.View Employees \n 3.Update Employee\n 4.View Employee\n 5.Delete Employee");
-		System.out.println("Enyer your choice: ");
+		System.out.println("\n\n1. Add Employee\n 2.View Employees \n 3.Update Employee\n 4.View Employee\n 5.Delete Employee \n 6Import \n7.Export\n 8.Exit");
+		System.out.println("Enter your choice: ");
 		sc = new java.util.Scanner(System.in);
 		int choice = sc.nextInt();
 		
@@ -23,7 +23,11 @@ public static void main(String[] abc) {
 			break;
 		case 5: emp.delete();
 			break;
-		case 6: System.exit(0);
+		case 6: emp.fileImport();
+			break;
+		case 7: emp.fileExport();
+			break;
+		case 8: System.exit(0);
 			break;
 		default: System.out.println("Invalid choice.");
 					break;

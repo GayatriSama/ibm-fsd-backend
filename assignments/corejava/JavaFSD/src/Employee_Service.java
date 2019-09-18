@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Employee_Service {
@@ -92,21 +96,62 @@ public class Employee_Service {
 		System.out.println("Enter ID of the employee to be displayed: ");
 		int id = sc.nextInt();
 		for(Employee_details e : employeeList) {
+//			System.out.println(id);
 			if(id == e.getId())
 			{
-				System.out.println("ID: \n"+e.getId()+" Name: \n"+e.getName()+" Designation: \n"+e.getDes()+" Salary:\n "+e.getSal());
+				System.out.println(id);
+				System.out.println("ID: "+e.getId()+"\n Name:"+e.getName()+"\n Designation: "+e.getDes()+"\n Salary: "+e.getSal());
 				break;
-				
 			}
 			else
 			{
 				System.out.println("Employee doesn't exist.");
-				break;
+				
 			}
+			break;
 		}
 		
 		
 	}
+
+	public void fileImport() {
+		// TODO Auto-generated method stub
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new FileReader(
+					"C:\\Training\\ibm-fsd-backend\\assignments\\corejava\\Empdata.txt"));
+			String line = reader.readLine();
+			while (line != null) {
+				//System.out.println(line);
+				String []tokens = line.split(",");
+				Employee_details emp = new Employee_details(Integer.parseInt(tokens[0]),tokens[1],tokens[2],Integer.parseInt(tokens[3]));
+				employeeList.add(emp);
+				line = reader.readLine();
+			}
+			reader.close();
+			System.out.println("File imported successfully.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+public void fileExport() {
+		 try{    
+	           FileWriter fw=new FileWriter("C:\\Training\\ibm-fsd-backend\\assignments\\corejava\\Empdata.txt");  
+	           for(Employee_details e : employeeList)
+	           {
+	        	   fw.write("Id: "+e.getId()+" Name: "+e.getName()+" Designation: "+e.getDes()+" Salary: "+e.getSal()+"\n"); 
+	        	   
+	           }
+	              
+	           fw.close();    
+	          }
+		 catch(Exception e){System.out.println(e);}    
+	          System.out.println("File exported succesfully");    
+		
+	}
+
+
 }
 		
 
